@@ -1,0 +1,30 @@
+
+<Project>
+  <UsingTask TaskName="AltCover.Prepare"   
+        AssemblyFile="../packages/altcover/tools/netcoreapp2.0/AltCover.dll"/>  
+  <UsingTask TaskName="AltCover.Collect"   
+        AssemblyFile="../packages/altcover/tools/netcoreapp2.0/AltCover.dll"/> 
+
+  <Target Name="InstrumentModulesAfterBuild" AfterTargets="BuildProject">
+
+    <!-- Altcover fails if _Reports folder doesn't exist -->
+    <MakeDir  
+            Directories="$(OutputPath)/netcoreapp2.0/_Reports"/>   
+  
+    <AltCover.Prepare 
+      InputDirectory="$(OutputPath)/netcoreapp2.0"  
+      SymbolDirectories="$(OutputPath)/netcoreapp2.0"  
+      OutputDirectory="$(OutputPath)/netcoreapp2.0/__Saved$([System.DateTime]::UtcNow.ToString().Replace(':','-').Replace('/','-').Replace(' ','+'))" 
+      XmlReport="$(OutputPath)/netcoreapp2.0/_Reports/MSBuildTest.xml"
+      CallContext="@(CallContext)"
+      />
+
+  </Target>
+   <Target Name="GenerateCoverageResult" AfterTargets="VSTest">
+      <AltCover.Collect 
+      RecorderDirectory="$(OutputPath)/netcoreapp2.0"   
+      LcovReport="./lcov.info"
+      />  
+
+    </Target>
+</Project>

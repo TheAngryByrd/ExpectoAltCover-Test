@@ -1,0 +1,6 @@
+Expecto
+FSharp.Core
+YoloDev.Expecto.TestSdk
+Microsoft.NET.Test.Sdk
+Altcover
+Microsoft.DotNet.Watcher.Tools

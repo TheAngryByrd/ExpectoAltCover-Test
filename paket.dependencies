@@ -1,0 +1,8 @@
+source https://www.nuget.org/api/v2/
+
+nuget Altcover 3.0.422
+nuget Expecto 7.0.1
+nuget FSharp.Core 4.3.4
+clitool Microsoft.DotNet.Watcher.Tools 2.0.0
+nuget Microsoft.NET.Test.Sdk 15.7.0
+nuget YoloDev.Expecto.TestSdk 0.5.0
